@@ -9,7 +9,7 @@ const ImageHover = () => {
   return (
     <div className={`bg-zinc-100  w-[800px] h-[500px] relative mx-auto mt-10 `}>
       <div
-        className={`absolute bg-[url("./images/img1.jpg")] bg-cover w-[100%] h-[100%] 
+        className={`absolute bg-[url("./images/img7.jpg")] bg-cover w-[100%] h-[100%] 
         `}
         onMouseEnter={() => {
           setHover1(true);
@@ -27,7 +27,7 @@ const ImageHover = () => {
         }}
       ></div>
       <div
-        className={`absolute bg-[url('./images/image3.jpg')] bg-cover w-[100%] h-[100%]  `}
+        className={`absolute bg-[url('./images/image5.jpg')] bg-cover w-[100%] h-[100%]  `}
         onMouseEnter={() => {
           setHover2(true);
         }}
@@ -42,7 +42,7 @@ const ImageHover = () => {
         }}
       ></div>
       <div
-        className={`absolute bg-[url('./images/image2.jpg')] bg-cover w-[100%] h-[100%] `}
+        className={`absolute bg-[url('./images/image6.jpg')] bg-cover w-[100%] h-[100%] `}
         onMouseEnter={() => {
           setHover3(true);
         }}
