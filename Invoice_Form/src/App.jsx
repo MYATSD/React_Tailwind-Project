@@ -37,6 +37,12 @@ function App() {
       price: 199.99,
     },
   ]);
+  const [quantity, setQuantity] = useState(0);
+  const addQuantity = (q) => {
+    setQuantity(q);
+  };
+  const [records, setRecords] = useState([]);
+  const addRecord = (newRec) => setRecords([...records, newRec]);
   return (
     <main
       id="invoiceForm"
@@ -45,9 +51,14 @@ function App() {
       <div className="container mx-auto">
         <Header />
         <Address />
-        <CreateForm products={products} />
-        <RecordTable />
-        <RecordTotal />
+        <CreateForm
+          products={products}
+          addRecord={addRecord}
+          records={records}
+          addQuantity={addQuantity}
+        />
+        <RecordTable records={records} />
+        <RecordTotal records={records} />
         <DrawerBtn />
 
         <Footer />

@@ -2,11 +2,13 @@ import React from "react";
 import Record from "./Record";
 import EmptyStage from "./EmptyStage";
 
-const RecordGroup = () => {
+const RecordGroup = ({ records }) => {
   return (
     <>
-      <Record />
-      <EmptyStage />
+      {records.length === 0 && <EmptyStage />}
+      {records.map((record, index) => (
+        <Record record={record} key={record.id} index={index} />
+      ))}
     </>
   );
 };

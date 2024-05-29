@@ -1,15 +1,17 @@
 import React from "react";
 
-const Record = () => {
+const Record = ({ record: { id, name, price, quantity, cost }, index }) => {
   return (
     <tr className="row group odd:bg-header odd:dark:bg-gray-900 even:bg-sideColor even:dark:bg-gray-800 border-b dark:border-gray-700">
-      <td className="row-no px-6 py-4"></td>
+      <td className="row-no px-6 py-4">{index + 1}</td>
       <th
         scope="row"
         className="row-product-name px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-      ></th>
+      >
+        {name}
+      </th>
       <td className=" px-6 py-4">
-        $ <span className="row-product-price text-end"> </span>
+        $ <span className="row-product-price text-end"> {price}</span>
       </td>
 
       <td className=" px-6 py-4 ">
@@ -29,7 +31,7 @@ const Record = () => {
             />
           </svg>
         </button>
-        <span className="row-quantity"></span>
+        <span className="row-quantity">{quantity}</span>
         <button className="add-quantity-btn font-medium text-gray-600 dark:text-blue-500 opacity-0  duration-300 translate-x-10 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto print:hidden hover:underline">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +51,7 @@ const Record = () => {
       </td>
 
       <td className=" px-6 py-4">
-        $ <span className="row-product-cost text-end"> </span>
+        $ <span className="row-product-cost text-end">{cost} </span>
       </td>
       <td className="px-6 py-4">
         <button className="row-del-btn  font-medium text-gray-600 dark:text-blue-500 opacity-0  duration-300 translate-x-10 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto print:hidden hover:underline">

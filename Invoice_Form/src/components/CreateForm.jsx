@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useRef } from "react";
 
-const CreateForm = ({ products }) => {
+const CreateForm = ({ products, addRecord, addQuantity }) => {
+  const idRef = useRef("");
+  const quantityRef = useRef("");
+
+  const createFormHandler = (e) => {
+    e.preventDefault();
+    const currentProduct = products.find(
+      (p) => p.id === parseInt(idRef.current.value)
+    );
+    const currentQuantity = parseInt(quantityRef.current.value);
+
+    const newRecord = {
+      id: Date.now(),
+      name: currentProduct.name,
+      price: currentProduct.price,
+      quantity: currentQuantity,
+      cost: currentProduct.price * currentQuantity,
+    };
+    addRecord(newRecord);
+    addQuantity(currentQuantity);
+    idRef.current.value = "";
+    quantityRef.current.value = "";
+  };
   return (
     <section className="mt-10 px-20 print:hidden">
-      <form id="createForm">
+      <form id="createForm" onSubmit={createFormHandler}>
         <div className="flex gap-3 border rounded-lg p-5">
           <div className="basis-5/12">
             <label
@@ -15,6 +37,7 @@ const CreateForm = ({ products }) => {
             <select
               id="productSelect"
               name="productSelect"
+              ref={idRef}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
               {products.map(({ id, name }) => {
@@ -37,6 +60,7 @@ const CreateForm = ({ products }) => {
               type="number"
               name="inputQuantity"
               id="inputQuantity"
+              ref={quantityRef}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder=""
               required
@@ -44,6 +68,7 @@ const CreateForm = ({ products }) => {
           </div>
           <button
             type="submit"
+            onClick={createFormHandler}
             className=" bg-header basis-2/12 hover:bg-sideColor focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
           >
             Buy

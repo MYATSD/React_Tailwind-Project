@@ -1,6 +1,9 @@
 import React from "react";
 
-const RecordTotal = () => {
+const RecordTotal = ({ records }) => {
+  const subTotal = records.reduce((pv, { cost }) => pv + cost, 0);
+  const tax = subTotal * 0.15;
+  const total = subTotal + tax;
   return (
     <section className="mt-20 px-20 flex justify-between items-center">
       <div className="flex h-full gap-1 border ">
@@ -26,7 +29,7 @@ const RecordTotal = () => {
                 SubTotal
               </th>
               <td className="px-6 py-4 max-w-[150px]">
-                $ <span className="subTotal">0</span>
+                $ <span className="subTotal">{subTotal}</span>
               </td>
             </tr>
             <tr className="bg-title rounded odd:bg-sideColor odd:dark:bg-gray-900 even:bg-title even:dark:bg-gray-800 dark:border-gray-700">
@@ -37,7 +40,7 @@ const RecordTotal = () => {
                 Tax(15%)
               </th>
               <td className="px-6 py-4 max-w-[150px]">
-                $ <span className="tax">0</span>
+                $ <span className="tax">{tax}</span>
               </td>
             </tr>
             <tr className="bg-title rounded odd:bg-sideColor odd:dark:bg-gray-900 even:bg-title even:dark:bg-gray-800 dark:border-gray-700">
@@ -48,7 +51,7 @@ const RecordTotal = () => {
                 Total
               </th>
               <td className="px-6 py-4 max-w-[150px]">
-                $ <span className="total">515</span>
+                $ <span className="total">{total}</span>
               </td>
             </tr>
           </tbody>
