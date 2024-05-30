@@ -37,16 +37,22 @@ function App() {
       price: 199.99,
     },
   ]);
+  const updateProducts = (newProduct) => setProducts([...products, newProduct]);
   const [quantity, setQuantity] = useState(0);
   const addQuantity = (q) => {
     setQuantity(q);
   };
   const [records, setRecords] = useState([]);
   const addRecord = (newRec) => setRecords([...records, newRec]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const drawerUpdate = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
   return (
     <main
       id="invoiceForm"
-      className=" max-w-[800px] h-[2000px] bg-background mx-auto my-10 py-10"
+      className="max-w-[900px] h-[2000px] bg-background mx-auto my-10 py-10"
     >
       <div className="container mx-auto">
         <Header />
@@ -59,7 +65,12 @@ function App() {
         />
         <RecordTable records={records} />
         <RecordTotal records={records} />
-        <DrawerBtn />
+        <DrawerBtn
+          drawerOpen={drawerOpen}
+          drawerUpdate={drawerUpdate}
+          products={products}
+          updateProducts={updateProducts}
+        />
 
         <Footer />
       </div>

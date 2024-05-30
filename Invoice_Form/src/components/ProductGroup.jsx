@@ -1,13 +1,13 @@
 import React from "react";
+import Product from "./Product";
 
-const ProductGroup = ({ id, name, price }) => {
+const ProductGroup = ({ products }) => {
   return (
-    <div className=" flex p-4 odd:bg-header even:bg-sideColor hover:bg-white mb-3 rounded justify-between items-center border">
-      <p className="product-name text-gray-600">{name}</p>
-      <p className="text-gray-400">
-        $ <span className="product-price">{price}</span>
-      </p>
-    </div>
+    <>
+      {products.map(({ id, name, price }) => (
+        <Product name={name} price={price} key={id} />
+      ))}
+    </>
   );
 };
 
