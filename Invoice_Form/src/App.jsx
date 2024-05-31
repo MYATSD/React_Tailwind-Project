@@ -38,10 +38,11 @@ function App() {
     },
   ]);
   const updateProducts = (newProduct) => setProducts([...products, newProduct]);
-  const [quantity, setQuantity] = useState(0);
+  const [quantity, setQuantity] = useState();
   const addQuantity = (q) => {
     setQuantity(q);
   };
+  console.log(quantity);
   const [records, setRecords] = useState([]);
   const addRecord = (newRec) => setRecords([...records, newRec]);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -62,8 +63,9 @@ function App() {
           addRecord={addRecord}
           records={records}
           addQuantity={addQuantity}
+          quantity={quantity}
         />
-        <RecordTable records={records} />
+        <RecordTable records={records} quantity={quantity} />
         <RecordTotal records={records} />
         <DrawerBtn
           drawerOpen={drawerOpen}

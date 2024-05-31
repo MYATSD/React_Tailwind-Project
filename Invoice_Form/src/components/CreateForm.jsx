@@ -1,6 +1,12 @@
 import React, { useRef } from "react";
 
-const CreateForm = ({ products, addRecord, addQuantity }) => {
+const CreateForm = ({
+  products,
+  addRecord,
+  records,
+  addQuantity,
+  quantity,
+}) => {
   const idRef = useRef("");
   const quantityRef = useRef("");
 
@@ -11,15 +17,29 @@ const CreateForm = ({ products, addRecord, addQuantity }) => {
     );
     const currentQuantity = parseInt(quantityRef.current.value);
 
-    const newRecord = {
-      id: Date.now(),
-      name: currentProduct.name,
-      price: currentProduct.price,
-      quantity: currentQuantity,
-      cost: currentProduct.price * currentQuantity,
-    };
-    addRecord(newRecord);
-    addQuantity(currentQuantity);
+    // const existedProduct = records.filter(
+    //   (record) => record.name != currentProduct.name
+    // );
+    // console.log(existedProduct);
+    // existedProduct && addRecord(newRecord);
+    const existedProduct = records.find(
+      (record) => record.name === currentProduct.name
+    );
+    if (existedProduct) {
+      const updateQuantity = existedProduct.quantity + currentQuantity;
+      addQuantity(updateQuantity);
+    } else {
+      addQuantity(currentQuantity);
+      const newRecord = {
+        id: Date.now(),
+        name: currentProduct.name,
+        price: currentProduct.price,
+        quantity: currentQuantity,
+        cost: currentProduct.price * currentQuantity,
+      };
+      addRecord(newRecord);
+    }
+
     idRef.current.value = "";
     quantityRef.current.value = "";
   };

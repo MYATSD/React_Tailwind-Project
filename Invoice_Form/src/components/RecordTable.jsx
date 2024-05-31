@@ -1,7 +1,7 @@
 import React from "react";
 import RecordGroup from "./RecordGroup";
 
-const RecordTable = ({ records }) => {
+const RecordTable = ({ records, quantity }) => {
   return (
     <div className="relative overflow-hidden px-20 sm:rounded-lg mt-20">
       <table
@@ -32,7 +32,7 @@ const RecordTable = ({ records }) => {
           </tr>
         </thead>
         <tbody id="rowGroup">
-          <RecordGroup records={records} />
+          <RecordGroup records={records} quantity={quantity} />
         </tbody>
       </table>
     </div>
