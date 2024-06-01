@@ -37,12 +37,20 @@ function App() {
       price: 199.99,
     },
   ]);
+  const deleteRecord = (id) => {
+    setRecords(records.filter((r) => r.id != id));
+  };
   const updateProducts = (newProduct) => setProducts([...products, newProduct]);
   const [quantity, setQuantity] = useState();
-  const addQuantity = (q) => {
-    setQuantity(q);
+  const addQuantity = (id) => {
+    records.map((record) => {
+      if (record.id === id) {
+        record.quantity = record.quantity + 1;
+        console.log(records);
+      }
+    });
   };
-  console.log(quantity);
+  const subQuantity = (id) => {};
   const [records, setRecords] = useState([]);
   const addRecord = (newRec) => setRecords([...records, newRec]);
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -65,7 +73,13 @@ function App() {
           addQuantity={addQuantity}
           quantity={quantity}
         />
-        <RecordTable records={records} quantity={quantity} />
+        <RecordTable
+          records={records}
+          quantity={quantity}
+          deleteRecord={deleteRecord}
+          addQuantity={addQuantity}
+          subQuantity={subQuantity}
+        />
         <RecordTotal records={records} />
         <DrawerBtn
           drawerOpen={drawerOpen}

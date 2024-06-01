@@ -1,7 +1,13 @@
 import React from "react";
 import RecordGroup from "./RecordGroup";
 
-const RecordTable = ({ records, quantity }) => {
+const RecordTable = ({
+  records,
+  quantity,
+  deleteRecord,
+  addQuantity,
+  subQuantity,
+}) => {
   return (
     <div className="relative overflow-hidden px-20 sm:rounded-lg mt-20">
       <table
@@ -32,7 +38,13 @@ const RecordTable = ({ records, quantity }) => {
           </tr>
         </thead>
         <tbody id="rowGroup">
-          <RecordGroup records={records} quantity={quantity} />
+          <RecordGroup
+            records={records}
+            quantity={quantity}
+            deleteRecord={deleteRecord}
+            subQuantity={subQuantity}
+            addQuantity={addQuantity}
+          />
         </tbody>
       </table>
     </div>

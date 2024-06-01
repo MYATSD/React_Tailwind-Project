@@ -27,6 +27,9 @@ const CreateForm = ({
     );
     if (existedProduct) {
       const updateQuantity = existedProduct.quantity + currentQuantity;
+      existedProduct.quantity = updateQuantity;
+
+      existedProduct.cost = (updateQuantity * existedProduct.price).toFixed(2);
       addQuantity(updateQuantity);
     } else {
       addQuantity(currentQuantity);
@@ -35,7 +38,7 @@ const CreateForm = ({
         name: currentProduct.name,
         price: currentProduct.price,
         quantity: currentQuantity,
-        cost: currentProduct.price * currentQuantity,
+        cost: (currentProduct.price * currentQuantity).toFixed(2),
       };
       addRecord(newRecord);
     }

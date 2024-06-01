@@ -1,9 +1,9 @@
 import React from "react";
 
 const RecordTotal = ({ records }) => {
-  const subTotal = records.reduce((pv, { cost }) => pv + cost, 0);
-  const tax = subTotal * 0.15;
-  const total = subTotal + tax;
+  const subTotal = records.reduce((pv, { cost }) => pv + parseFloat(cost), 0);
+  const tax = (subTotal * 0.15).toFixed(2);
+  const total = parseFloat(subTotal) + parseFloat(tax);
   return (
     <section className="mt-20 px-20 flex justify-between items-center">
       <div className="flex h-full gap-1 border ">
@@ -51,7 +51,7 @@ const RecordTotal = ({ records }) => {
                 Total
               </th>
               <td className="px-6 py-4 max-w-[150px]">
-                $ <span className="total">{total}</span>
+                $ <span className="total">{total.toFixed(2)}</span>
               </td>
             </tr>
           </tbody>

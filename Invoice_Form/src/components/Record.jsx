@@ -1,9 +1,25 @@
 import React from "react";
+import { useRef } from "react";
 
-const Record = ({ record: { id, name, price }, index, quantity }) => {
+const Record = ({
+  record: { id, name, price, quantity, cost },
+  index,
+  deleteRecord,
+  addQuantity,
+  subQuantity,
+}) => {
   const delBtnHandler = (e) => {
     e.preventDefault();
-    console.log("deleted");
+
+    deleteRecord(id);
+  };
+  const addQuantityBtnHandler = (e) => {
+    e.preventDefault();
+    addQuantity(id);
+  };
+  const subQuantityBtnHandler = (e) => {
+    e.preventDefault();
+    subQuantity(id);
   };
   return (
     <tr className="row group odd:bg-header odd:dark:bg-gray-900 even:bg-sideColor even:dark:bg-gray-800 border-b dark:border-gray-700">
@@ -19,7 +35,10 @@ const Record = ({ record: { id, name, price }, index, quantity }) => {
       </td>
 
       <td className=" px-6 py-4 ">
-        <button className="sub-quantity-btn  font-medium text-gray-600 dark:text-blue-500 opacity-0  duration-300 -translate-x-10 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto print:hidden hover:underline">
+        <button
+          onClick={subQuantityBtnHandler}
+          className="sub-quantity-btn  font-medium text-gray-600 dark:text-blue-500 opacity-0  duration-300 -translate-x-10 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto print:hidden hover:underline"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -36,7 +55,10 @@ const Record = ({ record: { id, name, price }, index, quantity }) => {
           </svg>
         </button>
         <span className="row-quantity">{quantity}</span>
-        <button className="add-quantity-btn font-medium text-gray-600 dark:text-blue-500 opacity-0  duration-300 translate-x-10 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto print:hidden hover:underline">
+        <button
+          onClick={addQuantityBtnHandler}
+          className="add-quantity-btn font-medium text-gray-600 dark:text-blue-500 opacity-0  duration-300 translate-x-10 pointer-events-none group-hover:opacity-100 group-hover:translate-x-0 group-hover:pointer-events-auto print:hidden hover:underline"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -55,10 +77,7 @@ const Record = ({ record: { id, name, price }, index, quantity }) => {
       </td>
 
       <td className=" px-6 py-4">
-        ${" "}
-        <span className="row-product-cost text-end">
-          {(quantity * price).toFixed(2)}{" "}
-        </span>
+        $ <span className="row-product-cost text-end">{cost}</span>
       </td>
       <td className="px-6 py-4">
         <button
